@@ -11,6 +11,7 @@ class Conversations::EventDataPresenter < SimpleDelegator
       messages: push_messages,
       meta: push_meta,
       status: status,
+      muted: muted?,
       unread_count: unread_incoming_messages.count,
       **push_timestamps
     }

@@ -1,5 +1,6 @@
 module Redis::Alfred
   CONVERSATION_MAILER_KEY = 'CONVERSATION::%d'.freeze
+  CONVERSATION_MUTE_KEY = 'CONVERSATION::%d::MUTED'.freeze
 
   class << self
     def rpoplpush(source, destination)

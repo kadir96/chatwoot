@@ -90,10 +90,14 @@
         icon="ion-clock"
       />
     </div>
+    <a v-show="!currentChat.muted" class="contact--mute" @click="mute">
+      Mute Contact
+    </a>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import ContactConversations from './ContactConversations.vue';
 import ContactDetailsItem from './ContactDetailsItem.vue';
@@ -117,6 +121,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({
+      currentChat: 'getSelectedChat',
+    }),
     currentConversationMetaData() {
       return this.$store.getters[
         'conversationMetadata/getConversationMetadata'
@@ -166,6 +173,9 @@ export default {
     onPanelToggle() {
       this.onToggle();
     },
+    mute() {
+      this.$store.dispatch('muteConversation', this.conversationId)
+    }
   },
 };
 </script>
@@ -247,5 +257,11 @@ export default {
     color: #fff;
     padding: 0.2rem;
   }
+}
+
+.contact--mute {
+  color: #ff382d;
+  display: block;
+  text-align: center;
 }
 </style>
